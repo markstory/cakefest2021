@@ -135,6 +135,7 @@ class Application extends BaseApplication
     {
         try {
             $this->addPlugin('Bake');
+            $this->addPlugin('CakephpFixtureFactories');
         } catch (MissingPluginException $e) {
             // Do not halt if the plugin is missing
         }

@@ -8,12 +8,18 @@ use Cake\TestSuite\ContainerStubTrait;
 use Cake\TestSuite\HttpClientTrait;
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
+use Cake\I18n\FrozenTime;
 
 class CalendarsControllerTest extends TestCase
 {
     use ContainerStubTrait;
     use HttpClientTrait;
     use IntegrationTestTrait;
+
+    public $fixtures = [
+        'app.Users',
+        'app.CalendarItems',
+    ];
 
     public function testIndexWithClientMock()
     {
@@ -24,7 +30,6 @@ class CalendarsControllerTest extends TestCase
 
         $this->assertResponseOk();
         $this->assertResponseContains('"id":1');
-        debug(substr($this->_response->getBody() . '', 0, 300));
     }
 
     public function testIndexWithServiceMock()
@@ -41,8 +46,16 @@ class CalendarsControllerTest extends TestCase
         });
         $this->get('/calendars');
 
-        debug(substr($this->_response->getBody() . '', 0, 300));
         $this->assertResponseOk();
         $this->assertResponseContains('"id":9');
+    }
+
+    public function testFixtureData()
+    {
+        $user = $this->getTableLocator()->get('Users')->findById(1)->firstOrFail();
+        $this->assertEquals(1, $user->id);
+
+        $calendar = $this->getTableLocator()->get('CalendarItems')->find()->firstOrFail();
+        $this->assertInstanceOf(FrozenTime::class, $calendar->start_time);
     }
 }
