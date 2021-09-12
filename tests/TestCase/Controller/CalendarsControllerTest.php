@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Test\TestCase\Controller;
 
 use App\Service\CalendarService;
+use App\Test\Factory\CalendarItemFactory;
 use Cake\TestSuite\ContainerStubTrait;
 use Cake\TestSuite\HttpClientTrait;
 use Cake\TestSuite\IntegrationTestTrait;
@@ -52,6 +53,8 @@ class CalendarsControllerTest extends TestCase
 
     public function testFixtureData()
     {
+        CalendarItemFactory::make(1)->persist();
+
         $user = $this->getTableLocator()->get('Users')->findById(1)->firstOrFail();
         $this->assertEquals(1, $user->id);
 

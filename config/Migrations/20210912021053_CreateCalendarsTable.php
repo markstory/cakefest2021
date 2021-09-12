@@ -27,10 +27,18 @@ class CreateCalendarsTable extends AbstractMigration
             ])
             ->addColumn('title', 'string')
             ->addColumn('description', 'text')
-            ->addColumn('start_time', 'datetime')
-            ->addColumn('end_time', 'datetime')
-            ->addColumn('start_date', 'datetime')
-            ->addColumn('end_date', 'datetime');
+            ->addColumn('start_time', 'datetime', [
+                'null' => true,
+            ])
+            ->addColumn('end_time', 'datetime', [
+                'null' => true,
+            ])
+            ->addColumn('start_date', 'datetime', [
+                'null' => true,
+            ])
+            ->addColumn('end_date', 'datetime', [
+                'null' => true,
+            ]);
         $table->create();
     }
 }

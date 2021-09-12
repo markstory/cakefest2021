@@ -40,7 +40,8 @@ class CalendarItemFactory extends CakephpBaseFactory
 
             return [
                 'title' => $faker->sentence(),
-                'description' => $faker->sentences(2),
+                'user_id' => 1,
+                'description' => $faker->sentence(),
                 'start_time' => $start,
                 'end_time' => $endTime,
             ];
