@@ -42,5 +42,5 @@ nbproject/*
 # Sass preprocessor
 .sass-cache/
 
-./app.sqlite
-./tests.sqlite
+/app.sqlite
+/tests.sqlite
