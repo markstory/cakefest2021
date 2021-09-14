@@ -18,6 +18,7 @@
         "josegonzalez/dotenv": "^3.2",
         "phpunit/phpunit": "~8.5.0 || ^9.3",
         "psy/psysh": "@stable",
+        "symfony/panther": "^1.1",
         "vierge-noire/cakephp-fixture-factories": "^2.0"
     },
     "suggest": {
