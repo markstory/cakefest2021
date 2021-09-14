@@ -89,7 +89,7 @@ try {
  */
 $appEnv = env('APP_ENV', 'app_local');
 if (file_exists(CONFIG . $appEnv . '.php')) {
-    Configure::load('app_local', 'default');
+    Configure::load($appEnv, 'default');
 }
 
 /*

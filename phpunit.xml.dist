@@ -8,6 +8,8 @@
     <php>
         <ini name="memory_limit" value="-1"/>
         <ini name="apc.enable_cli" value="1"/>
+
+        <env name="DATABASE_TEST_URL" value="mysql://docket:password@localhost/cake_test" />
     </php>
 
     <!-- Add any additional test suites you want to run here -->

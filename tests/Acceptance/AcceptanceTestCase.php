@@ -6,6 +6,7 @@ namespace App\Test\Acceptance;
 use Cake\TestSuite\TestCase;
 use Facebook\WebDriver\WebDriverDimension;
 use Symfony\Component\Panther\PantherTestCaseTrait;
+use Symfony\Component\Panther\Client as PantherClient;
 
 abstract class AcceptanceTestCase extends TestCase
 {
@@ -34,7 +35,10 @@ abstract class AcceptanceTestCase extends TestCase
         $this->client = null;
     }
 
-    protected function createClient()
+    /**
+     * Create a new panther client for interacting with the browser.
+     */
+    protected function createClient(): PantherClient
     {
         $client = static::createPantherClient([
             'browser' => static::FIREFOX,

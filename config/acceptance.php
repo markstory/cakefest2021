@@ -1,6 +1,9 @@
 <?php
 declare(strict_types=1);
 
+use Cake\Database\Connection;
+use Cake\Database\Driver\Mysql;
+
 /**
  * Configuration file loaded for acceptance tests.
  */
@@ -15,10 +18,6 @@ return [
      * true: Errors and warnings shown.
      */
     'debug' => false,
-
-    'App' => [
-        'inTest' => true,
-    ],
 
     /*
      * Security and encryption configuration
@@ -43,6 +42,13 @@ return [
      */
     'Datasources' => [
         'default' => [
+            'className' => Connection::class,
+            'driver' => Mysql::class,
+            'url' => env('DATABASE_TEST_URL', null),
+        ],
+        'test' => [
+            'className' => Connection::class,
+            'driver' => Mysql::class,
             'url' => env('DATABASE_TEST_URL', null),
         ],
     ],
