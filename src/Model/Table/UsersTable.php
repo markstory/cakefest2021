@@ -47,7 +47,7 @@ class UsersTable extends Table
 
         $this->addBehavior('Timestamp');
 
-        $this->hasMany('CalendarsTable', [
+        $this->hasMany('CalendarItems', [
             'foreignKey' => 'user_id',
         ]);
     }
@@ -90,4 +90,4 @@ class UsersTable extends Table
 
         return $rules;
     }
-}
+  }
