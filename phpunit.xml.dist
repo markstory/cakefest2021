@@ -15,6 +15,9 @@
         <testsuite name="app">
             <directory>tests/TestCase/</directory>
         </testsuite>
+        <testsuite name="acceptance">
+            <directory>tests/Acceptance/</directory>
+        </testsuite>
         <!-- Add plugin test suites here. -->
     </testsuites>
 
@@ -31,6 +34,7 @@
 
     <extensions>
         <extension class="Cake\TestSuite\Fixture\PHPUnitExtension" />
+        <extension class="Symfony\Component\Panther\ServerExtension" />
     </extensions>
 
     <!-- Ignore vendor tests in code coverage reports -->

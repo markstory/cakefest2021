@@ -54,3 +54,12 @@ session_id('cli');
 
 // Run migrations to seed the test db.
 Migrator::migrate();
+
+// Setup server for panther tests.
+// Panther doesn't make the router script absolute.
+$_SERVER['PANTHER_WEB_SERVER_ROUTER'] = realpath('./webroot/index.php');
+$_SERVER['PANTHER_WEB_SERVER_DIR'] = './webroot';
+$_SERVER['PANTHER_APP_ENV'] = 'acceptance';
+
+// Uncomment to have a browser attached for panther tests.
+// $_SERVER['PANTHER_NO_HEADLESS'] = true;
