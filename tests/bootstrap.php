@@ -53,7 +53,7 @@ ConnectionManager::alias('test_debug_kit', 'debug_kit');
 session_id('cli');
 
 // Run migrations to seed the test db.
-(new Migrator())->migrate();
+(new Migrator())->run();
 
 // Setup server for panther tests.
 // Panther doesn't make the router script absolute.
