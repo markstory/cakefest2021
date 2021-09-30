@@ -27,6 +27,8 @@ use Cake\Http\Client;
 use Cake\Http\Middleware\BodyParserMiddleware;
 use Cake\Http\Middleware\CsrfProtectionMiddleware;
 use Cake\Http\MiddlewareQueue;
+use Cake\Log\Log;
+use Cake\Log\Engine\FileLog;
 use Cake\ORM\Locator\TableLocator;
 use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
@@ -122,6 +124,17 @@ class Application extends BaseApplication
 
         $container->add(CalendarService::class)
             ->addArgument(Client::class);
+
+        $container->add(FileLog::class)
+            ->addArgument([
+                'path' => TMP,
+                'file' => 'dic.log',
+            ]);
+
+        Log::drop('dic');
+        Log::setConfig('dic', function () use ($container) {
+            return $container->get(FileLog::class);
+        });
     }
 
     /**
