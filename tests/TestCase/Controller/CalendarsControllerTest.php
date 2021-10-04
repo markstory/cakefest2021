@@ -51,14 +51,17 @@ class CalendarsControllerTest extends TestCase
         $this->assertResponseContains('"id":9');
     }
 
-    public function testFixtureData()
+    public function testGetLocal()
     {
-        CalendarItemFactory::make(1)->persist();
+        CalendarItemFactory::make(2)->persist();
 
-        $user = $this->getTableLocator()->get('Users')->findById(1)->firstOrFail();
-        $this->assertEquals(1, $user->id);
+        $service = $this->createApp()->getContainer()->get(CalendarService::class);
+        $result = $service->getLocal();
 
-        $calendar = $this->getTableLocator()->get('CalendarItems')->find()->firstOrFail();
-        $this->assertInstanceOf(FrozenTime::class, $calendar->start_time);
+        $this->assertCount(2, $result);
+        $this->assertInstanceOf(FrozenTime::class, $result[0]->start_time);
+        $this->assertInstanceOf(FrozenTime::class, $result[1]->start_time);
+        $this->assertEquals(1, $result[0]->user_id);
+        $this->assertEquals(1, $result[1]->user_id);
     }
 }
