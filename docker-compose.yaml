@@ -1,0 +1,28 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:13
+    container_name: cakefest2021_postgres
+    environment:
+      - POSTGRES_USER=my_app
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_DB=my_app
+      - PGUSER=my_app
+      - PGDATABASE=my_app
+      - PGPASSWORD=secret
+    volumes:
+      - ./:/application
+    ports:
+      - '5442:5432'
+
+  php:
+    image: webdevops/php-nginx:8.0
+    container_name: cakefest2021_cakephp
+    working_dir: /application/webroot
+    volumes:
+      - ./:/application
+    environment:
+      - WEB_DOCUMENT_ROOT=/application/webroot
+      - DATABASE_URL=postgres://my_app:secret@cakefest2021_postgres:5432/my_app
+    ports:
+      - "8099:80"
