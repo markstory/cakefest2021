@@ -50,4 +50,18 @@ class CalendarsControllerTest extends TestCase
         $this->assertResponseOk();
         $this->assertResponseContains('"id":9');
     }
+
+    public function testGetLocal()
+    {
+        CalendarItemFactory::make(2)->persist();
+
+        $service = $this->createApp()->getContainer()->get(CalendarService::class);
+        $result = $service->getLocal();
+
+        $this->assertCount(2, $result);
+        $this->assertInstanceOf(FrozenTime::class, $result[0]->start_time);
+        $this->assertInstanceOf(FrozenTime::class, $result[1]->start_time);
+        $this->assertEquals(1, $result[0]->user_id);
+        $this->assertEquals(1, $result[1]->user_id);
+    }
 }
