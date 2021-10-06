@@ -8,6 +8,8 @@
     <php>
         <ini name="memory_limit" value="-1"/>
         <ini name="apc.enable_cli" value="1"/>
+
+        <env name="DATABASE_TEST_URL" value="sqlite:////home/mark/code/cakefest2021/acceptance.sqlite" />
     </php>
 
     <!-- Add any additional test suites you want to run here -->
@@ -20,6 +22,7 @@
 
     <extensions>
         <extension class="Cake\TestSuite\Fixture\PHPUnitExtension" />
+        <extension class="Symfony\Component\Panther\ServerExtension" />
     </extensions>
 
     <!-- Ignore vendor tests in code coverage reports -->

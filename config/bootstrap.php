@@ -92,6 +92,15 @@ if (file_exists(CONFIG . 'app_local.php')) {
 }
 
 /*
+ * Load an environment local configuration file to provide overrides to your configuration.
+ * Notice: For security reasons app_local.php **should not** be included in your git repo.
+ */
+$appEnv = env('APP_ENV', 'app_local');
+if (file_exists(CONFIG . $appEnv . '.php')) {
+    Configure::load($appEnv, 'default');
+}
+
+/*
  * When debug = true the metadata cache should only last
  * for a short time.
  */
