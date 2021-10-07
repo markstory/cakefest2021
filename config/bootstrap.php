@@ -87,14 +87,6 @@ try {
  * Load an environment local configuration file to provide overrides to your configuration.
  * Notice: For security reasons app_local.php **should not** be included in your git repo.
  */
-if (file_exists(CONFIG . 'app_local.php')) {
-    Configure::load('app_local', 'default');
-}
-
-/*
- * Load an environment local configuration file to provide overrides to your configuration.
- * Notice: For security reasons app_local.php **should not** be included in your git repo.
- */
 $appEnv = env('APP_ENV', 'app_local');
 if (file_exists(CONFIG . $appEnv . '.php')) {
     Configure::load($appEnv, 'default');
@@ -188,41 +180,5 @@ ServerRequest::addDetector('tablet', function ($request) {
     return $detector->isTablet();
 });
 
-/*
- * You can set whether the ORM uses immutable or mutable Time types.
- * The default changed in 4.0 to immutable types. You can uncomment
- * below to switch back to mutable types.
- *
- * You can enable default locale format parsing by adding calls
- * to `useLocaleParser()`. This enables the automatic conversion of
- * locale specific date formats. For details see
- * @link https://book.cakephp.org/4/en/core-libraries/internationalization-and-localization.html#parsing-localized-datetime-data
- */
-// \Cake\Database\TypeFactory::build('time')
-//    ->useMutable();
-// \Cake\Database\TypeFactory::build('date')
-//    ->useMutable();
-// \Cake\Database\TypeFactory::build('datetime')
-//    ->useMutable();
-// \Cake\Database\TypeFactory::build('timestamp')
-//    ->useMutable();
-// \Cake\Database\TypeFactory::build('datetimefractional')
-//    ->useMutable();
-// \Cake\Database\TypeFactory::build('timestampfractional')
-//    ->useMutable();
-// \Cake\Database\TypeFactory::build('datetimetimezone')
-//    ->useMutable();
-// \Cake\Database\TypeFactory::build('timestamptimezone')
-//    ->useMutable();
-
 // There is no time-specific type in Cake
 TypeFactory::map('time', StringType::class);
-
-/*
- * Custom Inflector rules, can be set to correctly pluralize or singularize
- * table, model, controller names or whatever other string is passed to the
- * inflection functions.
- */
-//Inflector::rules('plural', ['/^(inflect)or$/i' => '\1ables']);
-//Inflector::rules('irregular', ['red' => 'redlings']);
-//Inflector::rules('uninflected', ['dontinflectme']);

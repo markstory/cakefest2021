@@ -4,18 +4,22 @@
     processIsolation="false"
     stopOnFailure="false"
     bootstrap="tests/bootstrap.php"
+    defaultTestSuite="app"
     >
     <php>
         <ini name="memory_limit" value="-1"/>
         <ini name="apc.enable_cli" value="1"/>
 
-        <env name="DATABASE_TEST_URL" value="sqlite:////home/mark/code/cakefest2021/acceptance.sqlite" />
+        <env name="DATABASE_TEST_URL" value="sqlite:////Users/markstory/code/cakefest2021/acceptance.sqlite" />
     </php>
 
     <!-- Add any additional test suites you want to run here -->
     <testsuites>
         <testsuite name="app">
             <directory>tests/TestCase/</directory>
+        </testsuite>
+        <testsuite name="acceptance">
+            <directory>tests/Acceptance/</directory>
         </testsuite>
         <!-- Add plugin test suites here. -->
     </testsuites>

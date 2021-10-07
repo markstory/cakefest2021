@@ -41,7 +41,7 @@ abstract class AcceptanceTestCase extends TestCase
     protected function createClient(): PantherClient
     {
         $client = static::createPantherClient([
-            'browser' => static::FIREFOX,
+            'browser' => static::CHROME,
         ], [], [
             'cookieJar' => static::$cookieJar,
         ]);

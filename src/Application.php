@@ -16,15 +16,19 @@ declare(strict_types=1);
  */
 namespace App;
 
+use App\Service\CalendarService;
 use Cake\Core\Configure;
 use Cake\Core\ContainerInterface;
 use Cake\Core\Exception\MissingPluginException;
 use Cake\Datasource\FactoryLocator;
 use Cake\Error\Middleware\ErrorHandlerMiddleware;
 use Cake\Http\BaseApplication;
+use Cake\Http\Client;
 use Cake\Http\Middleware\BodyParserMiddleware;
 use Cake\Http\Middleware\CsrfProtectionMiddleware;
 use Cake\Http\MiddlewareQueue;
+use Cake\Log\Engine\FileLog;
+use Cake\Log\Log;
 use Cake\ORM\Locator\TableLocator;
 use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
@@ -116,6 +120,21 @@ class Application extends BaseApplication
      */
     public function services(ContainerInterface $container): void
     {
+        $container->add(Client::class);
+
+        $container->add(CalendarService::class)
+            ->addArgument(Client::class);
+
+        $container->add(FileLog::class)
+            ->addArgument([
+                'path' => TMP,
+                'file' => 'container-log.log',
+            ]);
+        Log::drop('dic');
+        Log::setConfig('dic', function () use ($container) {
+            return $container->get(FileLog::class);
+        });
+
     }
 
     /**
